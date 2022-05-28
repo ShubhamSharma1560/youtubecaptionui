@@ -93,7 +93,6 @@ class BackendAPI extends React.Component {
   };
 
   downloadTxtFile = (lang, text) => {
-    alert(lang, text);
     const element = document.createElement("a");
     const file = new Blob([text], {
       type: "text/plain",
