@@ -28,7 +28,7 @@ class BackendAPI extends React.Component {
       isLoaded: false,
     });
 
-    var FinalURL = `http://127.0.0.1:5000/api/?video_url=${this.state.name}`;
+    var FinalURL = `https://youtubecaptionsummarizer.herokuapp.com/api/?video_url=${this.state.name}`;
 
     fetch(FinalURL)
       .then((res) => res.json())
