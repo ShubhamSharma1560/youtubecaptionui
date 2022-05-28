@@ -1,10 +1,6 @@
 import braille from "braille";
 import React from "react";
 import Tabs from "./Tabs";
-import ET from "../transcripts/English.txt";
-import HT from "../transcripts/Hindi.txt";
-import Punj from "../transcripts/Punjabi.txt";
-
 class BackendAPI extends React.Component {
   constructor(props) {
     super(props);
@@ -96,6 +92,17 @@ class BackendAPI extends React.Component {
     synth.speak(utterance);
   };
 
+  downloadTxtFile = (lang, text) => {
+    alert(lang, text);
+    const element = document.createElement("a");
+    const file = new Blob([text], {
+      type: "text/plain",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = lang + ".txt";
+    document.body.appendChild(element);
+    element.click();
+  };
   render() {
     const {
       isLoaded,
@@ -202,14 +209,15 @@ class BackendAPI extends React.Component {
                       </button>
                     </center>
                     <center>
-                      <a
-                        href={ET}
+                      <button
+                        onClick={() =>
+                          this.downloadTxtFile("English", englishTranscript)
+                        }
                         className="buttonDownload"
-                        download="English_Transcript.txt"
                         type="button"
                       >
                         Download
-                      </a>
+                      </button>
                     </center>
                   </div>
                   {englishTranscript}
@@ -219,14 +227,15 @@ class BackendAPI extends React.Component {
                 <div className="tab-content">
                   <div>
                     <center>
-                      <a
-                        href={HT}
+                      <button
                         className="buttonDownload"
-                        download="Hindi_Transcript.txt"
+                        onClick={() =>
+                          this.downloadTxtFile("Hindi", hindiTranscript)
+                        }
                         type="button"
                       >
                         Download
-                      </a>
+                      </button>
                     </center>
                   </div>
                   {hindiTranscript}
@@ -236,14 +245,15 @@ class BackendAPI extends React.Component {
                 <div className="tab-content">
                   <div>
                     <center>
-                      <a
-                        href={Punj}
+                      <button
+                        onClick={() =>
+                          this.downloadTxtFile("Punjabi", punjabiTranscript)
+                        }
                         className="buttonDownload"
-                        download="Punjabi_Transcript.txt"
                         type="button"
                       >
                         Download
-                      </a>
+                      </button>
                     </center>
                   </div>
                   {punjabiTranscript}
@@ -253,14 +263,15 @@ class BackendAPI extends React.Component {
                 <div className="tab-content">
                   <div>
                     <center>
-                      <a
-                        href={ET}
+                      <button
+                        onClick={() =>
+                          this.downloadTxtFile("Braille", brailleText)
+                        }
                         className="buttonDownload"
-                        download="Braille_Transcript.txt"
                         type="button"
                       >
                         Download
-                      </a>
+                      </button>
                     </center>
                   </div>
                   {brailleText}
